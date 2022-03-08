@@ -1,0 +1,8 @@
+package com.headfirstdesignpattern.behavior.encapsulate;
+
+public class Quack implements QuackBehavior {
+    @Override
+    public void quack() {
+        System.out.println("Quack");
+    }
+}
