@@ -4,25 +4,19 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
   <modelVersion>4.0.0</modelVersion>
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <configuration>
-          <source>16</source>
-          <target>16</target>
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
+  <packaging>pom</packaging>
+  <modules>
+    <module>ssa-client-customer</module>
+    <module>ssa-client-inventory</module>
+    <module>ssa-client-cart</module>
+    <module>ssa-client-order</module>
+  </modules>
   <parent>
     <artifactId>ssa-parent</artifactId>
     <groupId>com.i2i</groupId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
-
-  <artifactId>ssa-gui</artifactId>
+  <artifactId>ssa-client-parent</artifactId>
 
   <properties>
   </properties>
