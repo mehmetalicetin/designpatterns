@@ -95,9 +95,10 @@ necessary. Finally, all components will be configured to report errors to the Se
     - customerId: UUID
     - createDate: DateTime
     - lastUpdate: DateTime
+    - items: List<CartItem> (OneToMany relation)
+
 - CartItem
     - id: UUID
-    - customerId: UUID
     - productId: UUID
     - quantity: int
     - createDate: DateTime
