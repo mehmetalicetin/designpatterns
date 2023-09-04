@@ -1,0 +1,29 @@
+Identifying the aspects that vary
+Pizza orderPizza() {
+Pizza pizza = new Pizza();
+pizza.prepare();
+pizza.bake();
+pizza.cut();
+pizza.box(); return pizza;
+}
+
+But you need more than one type of pizza...
+
+So then you’d add some code that determines the appropriate type of pizza and then goes about making the pizza:
+
+
+Pizza orderPizza(String type) {
+Pizza pizza;
+if (type.equals(“cheese")) {
+            pizza = new CheesePizza();
+} else if (type.equals(“greek") {
+            pizza = new GreekPizza();
+} else if (type.equals(“pepperoni") {
+            pizza = new PepperoniPizza();
+}
+pizza.prepare();
+pizza.bake();
+pizza.cut();
+pizza.box();
+return pizza;
+}
