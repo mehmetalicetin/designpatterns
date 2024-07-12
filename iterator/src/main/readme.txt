@@ -1,5 +1,6 @@
 Iterator - Provide a way to access the elements of an aggregate object sequentially without exposing its
 underlying representation.
+Alt taraftaki yapısını ortaya çıkarmadan, torba nesnesinin elemanlarına sıralı bir erişim yöntemi sağlar.
 
 
 Can we encapsulate the iteration ?

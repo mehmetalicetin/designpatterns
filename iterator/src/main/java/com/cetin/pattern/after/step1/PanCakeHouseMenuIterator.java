@@ -4,11 +4,11 @@ import com.cetin.pattern.before.MenuItem;
 
 import java.util.List;
 
-public class PanCakeHouseIterator implements Iterator<MenuItem> {
+public class PanCakeHouseMenuIterator implements Iterator<MenuItem> {
 	List<MenuItem> menuItems;
 	int position = 0;
 
-	public PanCakeHouseIterator(List<MenuItem> menuItems) {
+	public PanCakeHouseMenuIterator(List<MenuItem> menuItems) {
 		this.menuItems = menuItems;
 	}
 
