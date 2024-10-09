@@ -1,0 +1,8 @@
+Bir medya oynatıcı uygulaması geliştirdiğinizi düşünelim. Bu uygulama, farklı medya oynatıcılarını (örneğin, VlcPlayer ve Mp4Player) desteklemeli.
+Ancak, bu oynatıcıların arayüzleri sizin ana medya oynatıcı sisteminizle (yani MediaPlayer arayüzü) uyumlu değil.
+
+Açıklama:
+AudioPlayer sınıfı, mp3 dosyalarını doğrudan oynatabiliyor.
+mp4 ve vlc formatları için MediaAdapter kullanarak AdvancedMediaPlayer sınıflarını MediaPlayer arayüzü ile uyumlu hale getiriyor.
+avi gibi desteklenmeyen formatlar için hata mesajı döndürülüyor.
+Bu örnek, uyumsuz arayüzlere sahip sistemlerin Adapter Design Pattern kullanılarak nasıl bir araya getirilebileceğini gösterir.
