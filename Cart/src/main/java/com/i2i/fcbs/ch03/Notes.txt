@@ -1,0 +1,44 @@
+class Program {
+
+  static void main() {
+
+    Product elma = new Product();
+    elma.name = "elma";
+    elma.price = 5;
+
+    Product armut = new Product();
+    armut.name = "armut";
+    armut.price = 2;
+
+    List<Product> products = new LinkedList();
+    products.add(elma);
+    products.add(armut);
+
+    Cart cart = new Cart();
+    cart.products = products;
+
+    System.out.println("Toplam: " + CostCalculator.calculate(cart));
+
+  }
+
+}
+
+class CostCalculator {
+  static double calculate(Cart cart) {
+    return 0;
+  }
+}
+
+class Cart {
+  List<Product> products;
+}
+
+class Product {
+  String name;
+  double price;
+}
+
+/* Goal: implement dynamic offers (cost calculating strategies)
+ * Example: 3 apples in cart -> get one free
+ * Example: 1 apple and one pear -> get 30% off
+ */
