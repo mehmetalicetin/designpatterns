@@ -14,10 +14,16 @@ public class Main {
 		elma2.name = "apple";
 		elma2.price = 5.0;
 
+		Product elma3 = new Product();
+		elma3.name = "apple";
+		elma3.price = 5.0;
+
 		Cart cart = new Cart();
 		cart.addProduct(elma);
 		cart.addProduct(armut);
-		cart.addProduct(elma2);
+		cart.addProduct(elma3);
+
+		cart.addStrategy();
 
 		System.out.println("Sum: " + CostCalculator.calculate(cart));
 	}
