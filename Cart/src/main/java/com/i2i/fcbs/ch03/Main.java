@@ -10,9 +10,14 @@ public class Main {
 		armut.name = "pear";
 		armut.price = 2.0;
 
+		Product elma2 = new Product();
+		elma2.name = "apple";
+		elma2.price = 5.0;
+
 		Cart cart = new Cart();
 		cart.addProduct(elma);
 		cart.addProduct(armut);
+		cart.addProduct(elma2);
 
 		System.out.println("Sum: " + CostCalculator.calculate(cart));
 	}
