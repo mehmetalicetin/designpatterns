@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.function.Predicate;
 
 public class Cart {
+	public static final String APPLE = "apple";
+	public static final String PEAR = "pear";
 	List<Product> products = new LinkedList<>();
 	List<Strategy> strategy = new LinkedList<>();
 
@@ -16,20 +18,23 @@ public class Cart {
 	}
 
 	public void addStrategy() {
-		long appleCount = products.stream().map(Product::getName).filter(e->e.equalsIgnoreCase("apple")).count();
+		long appleCount = products.stream().map(Product::getName).filter(e->e.equalsIgnoreCase(APPLE)).count();
 		if (appleCount == 3) {
 			Double price = products.stream()
-					.filter(getPredicate("apple"))
+					.filter(getPredicate(APPLE))
 					.findAny()
 					.map(Product::getPrice)
 					.orElse(0.0d);
 			strategy.add(new Offer1Strategy(price));
 		}
 
-		boolean isExistOneApple = isAnyMatch("apple");
-		boolean isExistOnePear = isAnyMatch("pear");
+		boolean isExistOneApple = isAnyMatch(APPLE);
+		boolean isExistOnePear = isAnyMatch(PEAR);
 		if (isExistOneApple && isExistOnePear) {
-			double sum = products.stream().mapToDouble(Product::getPrice).sum();
+			double sum = products
+					.stream()
+					.mapToDouble(Product::getPrice)
+					.sum();
 			strategy.add(new Offer2Strategy(sum));
 		}
 	}
