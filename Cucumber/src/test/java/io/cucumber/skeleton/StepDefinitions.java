@@ -23,4 +23,9 @@ public class StepDefinitions {
 	public void my_belly_should_growl() {
 		Assertions.assertTrue(belly.isFull, "my belly should not growl");
 	}
+
+	@Then("my belly should not growl")
+	public void my_belly_should_not_growl() {
+		Assertions.assertFalse(belly.isFull, "my belly should growl");
+	}
 }
