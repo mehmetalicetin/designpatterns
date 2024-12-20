@@ -4,37 +4,43 @@ import com.i2i.transaction.query.LogQueries;
 import com.i2i.transaction.query.TransactionStatement;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Objects;
 
-public class InsertCommand implements DatabaseCommand{
+public class SelectCommand implements DatabaseCommand {
 	private final TransactionStatement transactionStatement;
+	private final ResultProcessor processor;
 
-	private InsertCommand(TransactionStatement transactionStatement) {
+	public SelectCommand(TransactionStatement transactionStatement, ResultProcessor resultProcessor) {
 		this.transactionStatement = transactionStatement;
-	}
-
-	public static InsertCommand create(TransactionStatement statement) {
-		return new InsertCommand(statement);
+		this.processor = resultProcessor;
 	}
 
 	@Override
 	public void execute(LogQueries logQueries) throws SQLException {
 		validate(logQueries);
 		long startTime = System.currentTimeMillis();
-		getPreparedStatement().executeUpdate();
-		long elapsedTime = System.currentTimeMillis() - startTime;
-		logQueries.logExecutedQuery(transactionStatement, elapsedTime);
+		long elapsedTime;
+		try (ResultSet resultSet = getPreparedStatement().executeQuery()) {
+			processor.process(resultSet);
+			elapsedTime = System.currentTimeMillis() - startTime;
+			logQueries.logExecutedQuery(transactionStatement, elapsedTime);
+		} catch (SQLException e) {
+			logQueries.logFailedQuery(transactionStatement);
+			throw e;
+		}
 	}
 
-	private PreparedStatement getPreparedStatement() {
-		return transactionStatement.getStatement();
-	}
 
 	@Override
 	public void rollback(LogQueries logQueries) throws SQLException {
 		validate(logQueries);
 		logQueries.logFailedQuery(transactionStatement);
+	}
+
+	private PreparedStatement getPreparedStatement() {
+		return transactionStatement.getStatement();
 	}
 
 	private void validate(LogQueries logQueries) {

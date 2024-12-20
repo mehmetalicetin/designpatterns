@@ -3,6 +3,7 @@ package com.i2i.transaction.run;
 import com.i2i.transaction.command.DatabaseCommand;
 import com.i2i.transaction.entity.billrun.BillRunEntity;
 import com.i2i.transaction.entity.billrun.BillRunInsertStatement;
+import com.i2i.transaction.entity.billrun.BillRunSelectStatement;
 import com.i2i.transaction.manager.TransactionContext;
 import com.i2i.transaction.manager.TransactionManager;
 import com.i2i.transaction.query.LogQueries;
@@ -10,8 +11,12 @@ import com.i2i.transaction.query.LogQueries;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Launch {
+	private static List<BillRunEntity> billRunEntities = new ArrayList<>();
+
 	public static void main(String[] args) {
 		try {
 			TransactionContext context = new TransactionContext();
@@ -30,6 +35,12 @@ public class Launch {
 	private static void addCommands(TransactionContext context, TransactionManager manager) throws SQLException {
 		DatabaseCommand billRunInsertCommand = getBillRunInsertCommand(context);
 		manager.addCommand(billRunInsertCommand);
+		DatabaseCommand billRunSelect = getBillRunSelectCommand(context);
+		manager.addCommand(billRunSelect);
+	}
+
+	private static DatabaseCommand getBillRunSelectCommand(TransactionContext context) throws SQLException {
+		return BillRunSelectStatement.create(context).getDatabaseCommand(billRunEntities);
 	}
 
 	private static DatabaseCommand getBillRunInsertCommand(TransactionContext context) throws SQLException {

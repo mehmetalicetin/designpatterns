@@ -12,7 +12,8 @@ public class LogQueries {
 	private final List<Query> failedQueries   = new ArrayList<>();
 	private       boolean     isCommitted     = false;
 
-	public void logExecutedQuery(TransactionStatement statement) {
+	public void logExecutedQuery(TransactionStatement statement, long elapsedTime) {
+		statement.getQuery().setElapsedTime(elapsedTime);
 		executedQueries.add(statement.getQuery());
 	}
 

@@ -1,22 +1,27 @@
 package com.i2i.transaction.query;
 
 import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Arrays;
 import java.util.Objects;
 
 public class Query {
+	private final String name;
 	private final String   sql;
 	@Getter
 	private final Object[] fields;
+	@Setter
+	private long elapsedTime;
 
-	private Query(String sql, Object[] fields) {
+	private Query(String name, String sql, Object[] fields) {
+		this.name = name;
 		this.sql = sql;
 		this.fields = fields;
 	}
 
-	public static Query create(String query, Object[] fields) {
-		return new Query(query, fields);
+	public static Query create(String name, String query, Object[] fields) {
+		return new Query(name, query, fields);
 	}
 
 	public String getSql() {
@@ -32,8 +37,8 @@ public class Query {
 	@Override
 	public String toString() {
 		return "Query{" +
-				"sql='" + sql + '\'' +
-				", fields=" + Arrays.toString(fields) +
+				"name='" + name + '\'' +
+				", elapsedTime=" + elapsedTime + "ms" +
 				'}';
 	}
 }

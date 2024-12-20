@@ -10,7 +10,7 @@ import com.i2i.transaction.query.TransactionStatement;
 import java.sql.SQLException;
 
 
-public class BillRunInsertStatement implements BaseEntityStatement {
+public class BillRunInsertStatement implements BaseEntityStatement<BillRunEntity> {
 
 	private final TransactionContext transactionContext;
 
@@ -44,7 +44,7 @@ public class BillRunInsertStatement implements BaseEntityStatement {
 	}
 
 	private TransactionStatement getTransactionStatement(TransactionContext context, Object[] fields) throws SQLException {
-		Query query = Query.create(BillRunInsertStatement.INSERT_BILL_RUN, fields);
+		Query query = Query.create("INSERT_BILL_RUN", BillRunInsertStatement.INSERT_BILL_RUN, fields);
 		return TransactionStatement.create(query, context.getConnection());
 	}
 
