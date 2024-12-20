@@ -1,6 +1,7 @@
 package com.i2i.transaction.manager;
 
 import com.i2i.transaction.command.DatabaseCommand;
+import com.i2i.transaction.query.LogQueries;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -8,10 +9,12 @@ import java.util.List;
 
 public class TransactionManager {
 	private final TransactionContext    context;
+	private final LogQueries logQueries;
 	private final List<DatabaseCommand> commands = new ArrayList<>();
 
 	public TransactionManager(TransactionContext context) {
 		this.context = context;
+		this.logQueries = new LogQueries();
 	}
 
 	public void addCommand(DatabaseCommand command) {
@@ -41,10 +44,14 @@ public class TransactionManager {
 
 	private void execute(DatabaseCommand command) throws SQLException {
 		try{
-			command.execute(context.getLogTransactions());
+			command.execute(logQueries);
 		}catch (SQLException e){
-			command.rollback(context.getLogTransactions());
+			command.rollback(logQueries);
 			e.printStackTrace();
 		}
+	}
+
+	public LogQueries getLogQueries() {
+		return logQueries;
 	}
 }

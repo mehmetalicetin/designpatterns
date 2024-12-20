@@ -14,13 +14,13 @@ import java.time.Instant;
 public class Launch {
 	public static void main(String[] args) {
 		try {
-			TransactionContext context = new TransactionContext(new LogQueries());
+			TransactionContext context = new TransactionContext();
 			TransactionManager manager = new TransactionManager(context);
 			addCommands(context, manager);
 			manager.execute();
-
-			context.getLogTransactions().getExecutedQueries().forEach(System.out::println);
-			context.getLogTransactions().getFailedQueries().forEach(System.out::println);
+			LogQueries logQueries = manager.getLogQueries();
+			logQueries.getExecutedQueries().forEach(System.out::println);
+			logQueries.getFailedQueries().forEach(System.out::println);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

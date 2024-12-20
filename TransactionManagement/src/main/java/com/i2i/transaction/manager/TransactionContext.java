@@ -10,11 +10,9 @@ import java.sql.SQLException;
 public class TransactionContext {
 	@Getter
 	private final Connection connection;
-	private final LogQueries logQueries;
 
-	public TransactionContext(LogQueries logQueries) throws SQLException {
-		this.logQueries = logQueries;
-		connection = DriverManager.getConnection("");
+	public TransactionContext() throws SQLException {
+		connection = DriverManager.getConnection();
 		connection.setAutoCommit(false); // Begin transaction
 	}
 
@@ -30,9 +28,5 @@ public class TransactionContext {
 		if (connection != null) {
 			connection.close();
 		}
-	}
-
-	public LogQueries getLogTransactions() {
-		return logQueries;
 	}
 }
