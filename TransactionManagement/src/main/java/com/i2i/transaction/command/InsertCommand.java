@@ -22,9 +22,10 @@ public class InsertCommand implements DatabaseCommand{
 	public void execute(LogQueries logQueries) throws SQLException {
 		validate(logQueries);
 		long startTime = System.currentTimeMillis();
-		getPreparedStatement().executeUpdate();
+		getPreparedStatement().executeBatch();
 		long elapsedTime = System.currentTimeMillis() - startTime;
-		logQueries.logExecutedQuery(transactionStatement, elapsedTime);
+		transactionStatement.setElapsedTime(elapsedTime);
+		logQueries.logExecutedQuery(transactionStatement);
 	}
 
 	private PreparedStatement getPreparedStatement() {
@@ -32,7 +33,7 @@ public class InsertCommand implements DatabaseCommand{
 	}
 
 	@Override
-	public void rollback(LogQueries logQueries) throws SQLException {
+	public void rollback(LogQueries logQueries) {
 		validate(logQueries);
 		logQueries.logFailedQuery(transactionStatement);
 	}

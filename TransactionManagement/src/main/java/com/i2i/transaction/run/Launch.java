@@ -19,8 +19,8 @@ public class Launch {
 
 	public static void main(String[] args) {
 		try {
-			TransactionContext context = new TransactionContext();
-			TransactionManager manager = new TransactionManager(context);
+			TransactionContext context = TransactionContext.create();
+			TransactionManager manager = TransactionManager.create(context);
 			addCommands(context, manager);
 			manager.execute();
 			LogQueries logQueries = manager.getLogQueries();
@@ -35,6 +35,8 @@ public class Launch {
 	private static void addCommands(TransactionContext context, TransactionManager manager) throws SQLException {
 		DatabaseCommand billRunInsertCommand = getBillRunInsertCommand(context);
 		manager.addCommand(billRunInsertCommand);
+		DatabaseCommand billRunListInsertCommand = getBillRunListInsertCommand(context);
+		manager.addCommand(billRunListInsertCommand);
 		DatabaseCommand billRunSelect = getBillRunSelectCommand(context);
 		manager.addCommand(billRunSelect);
 	}
@@ -44,6 +46,7 @@ public class Launch {
 	}
 
 	private static DatabaseCommand getBillRunInsertCommand(TransactionContext context) throws SQLException {
+		List<BillRunEntity> billRunEntities = new ArrayList<>();
 		BillRunEntity billRun = BillRunEntity.builder()
 				.billRunId(-1L)
 				.billAcctId(1213963L)
@@ -56,6 +59,39 @@ public class Launch {
 				.dueDate(Timestamp.from(Instant.now()))
 				.cDate(Timestamp.from(Instant.now()))
 				.build();
-		return BillRunInsertStatement.create(context).getDatabaseCommand(billRun);
+		billRunEntities.add(billRun);
+		return BillRunInsertStatement.create(context).getDatabaseCommand(billRunEntities);
+	}
+
+	private static DatabaseCommand getBillRunListInsertCommand(TransactionContext context) throws SQLException {
+		List<BillRunEntity> billRunEntities = new ArrayList<>();
+		BillRunEntity billRun = BillRunEntity.builder()
+				.billRunId(-2L)
+				.billAcctId(1213963L)
+				.loggedInUserName("Deneme-Cetin")
+				.sDate(Timestamp.from(Instant.now()))
+				.applyOcc("X")
+				.invType("IN")
+				.status("D")
+				.invDate(Timestamp.from(Instant.now()))
+				.dueDate(Timestamp.from(Instant.now()))
+				.cDate(Timestamp.from(Instant.now()))
+				.build();
+		BillRunEntity billRun2 = BillRunEntity.builder()
+				.billRunId(-3L)
+				.billAcctId(1213963L)
+				.loggedInUserName("Deneme-Cetin")
+				.sDate(Timestamp.from(Instant.now()))
+				.applyOcc("X")
+				.invType("IN")
+				.status("D")
+				.invDate(Timestamp.from(Instant.now()))
+				.dueDate(Timestamp.from(Instant.now()))
+				.cDate(Timestamp.from(Instant.now()))
+				.build();
+
+		billRunEntities.add(billRun);
+		billRunEntities.add(billRun2);
+		return BillRunInsertStatement.create(context).getDatabaseCommand(billRunEntities);
 	}
 }

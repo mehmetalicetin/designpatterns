@@ -38,7 +38,8 @@ public class Query {
 	public String toString() {
 		return "Query{" +
 				"name='" + name + '\'' +
-				", elapsedTime=" + elapsedTime + "ms" +
+				", sql='" + sql + '\'' +
+				", fields=" + Arrays.toString(fields) +
 				'}';
 	}
 }

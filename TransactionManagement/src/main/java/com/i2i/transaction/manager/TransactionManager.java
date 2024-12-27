@@ -12,9 +12,13 @@ public class TransactionManager {
 	private final LogQueries logQueries;
 	private final List<DatabaseCommand> commands = new ArrayList<>();
 
-	public TransactionManager(TransactionContext context) {
+	private TransactionManager(TransactionContext context) {
 		this.context = context;
 		this.logQueries = new LogQueries();
+	}
+
+	public static TransactionManager create(TransactionContext context) {
+		return new TransactionManager(context);
 	}
 
 	public void addCommand(DatabaseCommand command) {

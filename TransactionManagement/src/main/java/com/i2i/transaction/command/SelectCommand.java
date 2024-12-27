@@ -25,10 +25,8 @@ public class SelectCommand implements DatabaseCommand {
 		try (ResultSet resultSet = getPreparedStatement().executeQuery()) {
 			processor.process(resultSet);
 			elapsedTime = System.currentTimeMillis() - startTime;
-			logQueries.logExecutedQuery(transactionStatement, elapsedTime);
-		} catch (SQLException e) {
-			logQueries.logFailedQuery(transactionStatement);
-			throw e;
+			transactionStatement.setElapsedTime(elapsedTime);
+			logQueries.logExecutedQuery(transactionStatement);
 		}
 	}
 

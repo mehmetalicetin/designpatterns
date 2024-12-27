@@ -1,7 +1,6 @@
 package com.i2i.transaction.entity.billrun;
 
 import com.i2i.transaction.command.DatabaseCommand;
-import com.i2i.transaction.command.InsertCommand;
 import com.i2i.transaction.command.SelectCommand;
 import com.i2i.transaction.entity.BaseEntityStatement;
 import com.i2i.transaction.manager.TransactionContext;

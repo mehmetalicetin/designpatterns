@@ -12,13 +12,20 @@ public class LogQueries {
 	private final List<Query> failedQueries   = new ArrayList<>();
 	private       boolean     isCommitted     = false;
 
-	public void logExecutedQuery(TransactionStatement statement, long elapsedTime) {
-		statement.getQuery().setElapsedTime(elapsedTime);
-		executedQueries.add(statement.getQuery());
+	public void logExecutedQuery(TransactionStatement statement) {
+		System.out.println(String.format("Log succeed: Transaction_Id:%d  Size:%d", statement.getId(), statement.size()));
+		for (Query query : statement.getQueries()) {
+			query.setElapsedTime(statement.getElapsedTime());
+			executedQueries.add(query);
+		}
 	}
 
 	public void logFailedQuery(TransactionStatement statement) {
-		failedQueries.add(statement.getQuery());
+		System.out.println(String.format("Log failed: Transaction_Id:%d  Size:%d", statement.getId(), statement.size()));
+		for (Query query : statement.getQueries()) {
+			query.setElapsedTime(statement.getElapsedTime());
+			failedQueries.addAll(statement.getQueries());
+		}
 	}
 
 	public void setCommitted(boolean committed) {

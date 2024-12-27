@@ -7,10 +7,11 @@ import com.i2i.transaction.manager.TransactionContext;
 import com.i2i.transaction.query.Query;
 import com.i2i.transaction.query.TransactionStatement;
 
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.List;
 
-
-public class BillRunInsertStatement implements BaseEntityStatement<BillRunEntity> {
+public class BillRunInsertStatement implements BaseEntityStatement<List<BillRunEntity>> {
 
 	private final TransactionContext transactionContext;
 
@@ -26,26 +27,29 @@ public class BillRunInsertStatement implements BaseEntityStatement<BillRunEntity
 	}
 
 	@Override
-	public DatabaseCommand getDatabaseCommand(BillRunEntity billRun) throws SQLException {
-		int index = -1;
-		Object[] fields= new Object[10];
-		fields[++index] = billRun.getBillRunId();
-		fields[++index] = billRun.getBillAcctId();
-		fields[++index] = billRun.getLoggedInUserName();
-		fields[++index] = billRun.getSDate();
-		fields[++index] = billRun.getApplyOcc();
-		fields[++index] = billRun.getInvType();
-		fields[++index] = billRun.getStatus();
-		fields[++index] = billRun.getInvDate();
-		fields[++index] = billRun.getDueDate();
-		fields[++index] = billRun.getCDate();
-		TransactionStatement transactionStatement = getTransactionStatement(transactionContext, fields);
+	public DatabaseCommand getDatabaseCommand(List<BillRunEntity> billRunEntities) throws SQLException {
+		PreparedStatement preparedStatement = transactionContext.getConnection().prepareStatement(INSERT_BILL_RUN);
+		TransactionStatement transactionStatement = TransactionStatement.create(preparedStatement);
+		for (BillRunEntity billRun : billRunEntities) {
+			int index = -1;
+			Object[] fields= new Object[10];
+			fields[++index] = billRun.getBillRunId();
+			fields[++index] = billRun.getBillAcctId();
+			fields[++index] = billRun.getLoggedInUserName();
+			fields[++index] = billRun.getSDate();
+			fields[++index] = billRun.getApplyOcc();
+			fields[++index] = billRun.getInvType();
+			fields[++index] = billRun.getStatus();
+			fields[++index] = billRun.getInvDate();
+			fields[++index] = billRun.getDueDate();
+			fields[++index] = billRun.getCDate();
+			transactionStatement.addBatch(getQuery(fields));
+		}
 		return InsertCommand.create(transactionStatement);
 	}
 
-	private TransactionStatement getTransactionStatement(TransactionContext context, Object[] fields) throws SQLException {
-		Query query = Query.create("INSERT_BILL_RUN", BillRunInsertStatement.INSERT_BILL_RUN, fields);
-		return TransactionStatement.create(query, context.getConnection());
+	private Query getQuery(Object[] fields) {
+		 return Query.create("INSERT_BILL_RUN", BillRunInsertStatement.INSERT_BILL_RUN, fields);
 	}
 
 }

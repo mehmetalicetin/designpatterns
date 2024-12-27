@@ -1,28 +1,49 @@
 package com.i2i.transaction.query;
 
 import lombok.Getter;
+import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
+import java.util.UUID;
 
 @Getter
 public final class TransactionStatement {
-	private final Query             query;
+	private final long id = UUID.randomUUID().getMostSignificantBits();
+	private List<Query>             queries = new ArrayList<>();
 	private final PreparedStatement statement;
+	@Setter
+	private long elapsedTime;
 
 	private TransactionStatement(Query query, Connection connection) throws SQLException {
-		this.query = query;
+		this.queries.add(query);
 		Objects.requireNonNull(query, "query cannot be null");
 		this.statement = connection.prepareStatement(query.getSql());
-		arrangeStatements();
+		arrangeStatements(query);
+	}
+
+	public TransactionStatement(PreparedStatement preparedStatement) {
+		this.statement = preparedStatement;
+	}
+
+	public void addBatch(Query query) throws SQLException {
+		this.queries.add(query);
+		arrangeStatements(query);
+		this.statement.addBatch();
+	}
+
+	public static TransactionStatement create(PreparedStatement preparedStatement) {
+		return new TransactionStatement(preparedStatement);
 	}
 
 	public static TransactionStatement create(Query query, Connection connection) throws SQLException {
 		return new TransactionStatement(query, connection);
 	}
 
-	private void arrangeStatements() throws SQLException {
+	public void arrangeStatements(Query query) throws SQLException {
 		Object[] fields = query.getFields();
 		for (int i = 0; i < fields.length; i++) {
 			setParameterToPreparedStatement(this.statement, i+1, fields[i]);
@@ -54,5 +75,18 @@ public final class TransactionStatement {
 
 	private void setNullParameter(PreparedStatement ps, int index) throws SQLException {
 		ps.setNull(index, Types.VARCHAR);
+	}
+
+
+	public int size(){
+		return this.queries.size();
+	}
+
+	@Override
+	public String toString() {
+		return "TransactionStatement{" +
+				"id=" + id +
+				", elapsedTime=" + elapsedTime +
+				'}';
 	}
 }
