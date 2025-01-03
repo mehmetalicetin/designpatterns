@@ -1,0 +1,8 @@
+The originator class produces snapshots of its own state restores its state from snapshots.
+The memento object acts as a snapshot of the originator's state.
+
+The caretaker responsible for capturing and restoring the originator state.
+
+
+lets you save and restore the state of an object without
+revealing the details without revealing the details of its implementation.
