@@ -1,0 +1,3 @@
+order:
+  service:
+    url: localhost:8092

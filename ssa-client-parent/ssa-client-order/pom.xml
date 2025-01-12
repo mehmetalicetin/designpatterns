@@ -12,4 +12,12 @@
 
   <artifactId>ssa-client-order</artifactId>
 
+  <dependencies>
+    <dependency>
+      <groupId>com.i2i</groupId>
+      <artifactId>ssa-model-order</artifactId>
+      <version>${api.version}</version>
+    </dependency>
+  </dependencies>
+
 </project>
