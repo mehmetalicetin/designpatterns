@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    #image: order-api-docker:latest # Replace with your actual image name
+    container_name: order-api-container
+    ports:
+      - "8092:8092" # Map the container's port 8092 to the host's port 8092
+    environment:
+      - SPRING_PROFILES_ACTIVE=h2 # Activate the 'h2' profile if configured
+      - SPRING_DATASOURCE_URL=jdbc:h2:mem:testdb
+      - SPRING_DATASOURCE_DRIVER_CLASS_NAME=org.h2.Driver
+      - SPRING_DATASOURCE_USERNAME=sa
+      - SPRING_DATASOURCE_PASSWORD=sa
