@@ -12,4 +12,12 @@
 
   <artifactId>ssa-client-cart</artifactId>
 
+<dependencies>
+  <dependency>
+    <groupId>com.i2i</groupId>
+    <artifactId>ssa-model-cart</artifactId>
+    <version>${api.version}</version>
+  </dependency>
+</dependencies>
+
 </project>
