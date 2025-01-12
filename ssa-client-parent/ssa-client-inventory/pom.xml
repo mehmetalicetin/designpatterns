@@ -12,4 +12,12 @@
 
   <artifactId>ssa-client-inventory</artifactId>
 
+  <dependencies>
+    <dependency>
+      <groupId>com.i2i</groupId>
+      <artifactId>ssa-model-inventory</artifactId>
+      <version>${api.version}</version>
+    </dependency>
+  </dependencies>
+
 </project>
