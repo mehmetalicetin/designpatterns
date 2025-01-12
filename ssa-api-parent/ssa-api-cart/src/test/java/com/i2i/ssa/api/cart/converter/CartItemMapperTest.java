@@ -37,6 +37,6 @@ class CartItemMapperTest {
 		CartItemRequestCollectionDTO dto = CartItemRequestCollectionDTO.builder().cartItems(List.of(cartItemRequestDTO)).build();
 		List<CartItem> converted = cartItemMapper.toCartItems(dto);
 		assertNotNull(converted);
-		assertEquals(cartItemRequestDTO.getProductId(), converted.get(0).getProductId());
+		assertEquals(cartItemRequestDTO.getProductId(), converted.getFirst().getProductId());
 	}
 }

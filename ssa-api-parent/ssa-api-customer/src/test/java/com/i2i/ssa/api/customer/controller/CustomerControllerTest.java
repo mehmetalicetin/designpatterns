@@ -49,14 +49,13 @@ class CustomerControllerTest {
 
 	@Test
 	void create() throws Exception {
-		String uri = BASE_URL;
 		CustomerRequestDTO requestDto = CustomerRequestDTO.builder().build();
 
 		when(service.create(any(CustomerRequestDTO.class)))
 				.thenReturn(CustomerResponseDTO.builder().name("Ali").build());
 
 		String json = getJson(requestDto);
-		var resultActions = mockMvc.perform(post(uri).content(json).contentType(MediaType.APPLICATION_JSON));
+		var resultActions = mockMvc.perform(post(BASE_URL).content(json).contentType(MediaType.APPLICATION_JSON));
 
 		resultActions.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON));

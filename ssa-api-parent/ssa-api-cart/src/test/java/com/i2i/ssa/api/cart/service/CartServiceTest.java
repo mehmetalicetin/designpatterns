@@ -1,7 +1,6 @@
 package com.i2i.ssa.api.cart.service;
 
 import com.i2i.dto.cart.CartRequestDTO;
-import com.i2i.dto.cart.CartResponseDTO;
 import com.i2i.ssa.api.cart.mapper.CartMapper;
 import com.i2i.ssa.api.cart.model.Cart;
 import com.i2i.ssa.api.cart.repository.CartRepository;
@@ -24,10 +23,6 @@ import static org.mockito.Mockito.when;
 class CartServiceTest {
 	@InjectMocks
 	private CartService service;
-
-	@Mock
-	CartItemService cartItemService;
-
 	@Mock
 	CartMapper converter;
 
@@ -36,10 +31,6 @@ class CartServiceTest {
 
 	@Mock
 	CartRequestDTO cartRequestDTO;
-
-	@Mock
-	CartResponseDTO cartResponseDTO;
-
 	@Mock
 	UUID uuid;
 

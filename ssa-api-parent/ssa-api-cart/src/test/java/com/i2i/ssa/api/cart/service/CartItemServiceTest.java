@@ -2,7 +2,6 @@ package com.i2i.ssa.api.cart.service;
 
 import com.i2i.ssa.api.cart.model.Cart;
 import com.i2i.ssa.api.cart.model.CartItem;
-import com.i2i.ssa.api.cart.repository.CartItemRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -22,10 +21,6 @@ class CartItemServiceTest {
 
 	@InjectMocks
 	private CartItemService service;
-
-	@Mock
-	private CartItemRepository repository;
-
 	@Mock
 	UUID uuid;
 
@@ -36,6 +31,7 @@ class CartItemServiceTest {
 	private Cart cart;
 
 	MockMvc mockMvc;
+
 
 	@BeforeEach
 	void setUp() {

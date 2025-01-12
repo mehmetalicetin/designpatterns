@@ -56,7 +56,6 @@ class ProductControllerTest {
 
 	@Test
 	void getProducts() throws Exception {
-		String uri = BASE_URL;
 		UUID uuid = UUID.randomUUID();
 		ProductResponseCollectionDTO responseCollectionProductDto = ProductResponseCollectionDTO.builder()
 				.products(List.of(ProductResponseDTO.builder().id(uuid).build()))
@@ -64,7 +63,7 @@ class ProductControllerTest {
 
 		when(service.getProducts()).thenReturn(responseCollectionProductDto);
 
-		ResultActions resultActions = mockMvc.perform(get(uri, uuid));
+		ResultActions resultActions = mockMvc.perform(get(BASE_URL, uuid));
 		resultActions.andExpect(status().isOk());
 	}
 
@@ -97,14 +96,13 @@ class ProductControllerTest {
 
 	@Test
 	void create() throws Exception {
-		String uri = BASE_URL;
 		ProductRequestDTO requestDto = ProductRequestDTO.builder().build();
 
 		when(service.create(any(ProductRequestDTO.class)))
 				.thenReturn(ProductResponseDTO.builder().name("Ali").build());
 
 		String json = getJson(requestDto);
-		var resultActions = mockMvc.perform(post(uri).content(json).contentType(MediaType.APPLICATION_JSON));
+		var resultActions = mockMvc.perform(post(BASE_URL).content(json).contentType(MediaType.APPLICATION_JSON));
 
 		resultActions.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON));
