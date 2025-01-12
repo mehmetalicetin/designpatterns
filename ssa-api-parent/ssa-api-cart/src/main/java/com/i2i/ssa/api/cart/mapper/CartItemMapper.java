@@ -5,7 +5,6 @@ import com.i2i.dto.cartItem.CartItemRequestDTO;
 import com.i2i.ssa.api.cart.model.CartItem;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;

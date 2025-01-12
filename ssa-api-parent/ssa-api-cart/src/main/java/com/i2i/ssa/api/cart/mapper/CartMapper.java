@@ -8,7 +8,6 @@ import com.i2i.ssa.api.cart.model.Cart;
 import com.i2i.ssa.api.cart.model.CartItem;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
