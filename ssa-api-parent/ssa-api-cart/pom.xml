@@ -12,7 +12,6 @@
   </parent>
 
   <artifactId>ssa-api-cart</artifactId>
-  <version>${project.version}</version>
 
   <dependencies>
     <dependency>

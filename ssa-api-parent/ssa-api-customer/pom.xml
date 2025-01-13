@@ -12,7 +12,6 @@
   </parent>
 
   <artifactId>ssa-api-customer</artifactId>
-  <version>${project.version}</version>
 
   <dependencies>
     <dependency>

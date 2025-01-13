@@ -8,14 +8,13 @@
     </parent>
 
     <artifactId>ssa-model-inventory</artifactId>
-    <version>${model.version}</version>
 
 
     <dependencies>
         <dependency>
             <groupId>com.i2i</groupId>
             <artifactId>ssa-model-core</artifactId>
-            <version>${model.version}</version>
+            <version>${project.version}</version>
         </dependency>
     </dependencies>
 

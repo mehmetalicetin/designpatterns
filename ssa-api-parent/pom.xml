@@ -10,8 +10,11 @@
     <version>0.0.1-SNAPSHOT</version>
   </parent>
   <artifactId>ssa-api-parent</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
 
+  <properties>
+    <h2.version>2.3.232</h2.version>
+    <spring.doc.version>2.2.0</spring.doc.version>
+  </properties>
 
   <modules>
     <module>ssa-api-customer</module>
@@ -21,17 +24,6 @@
     <module>ssa-api-core</module>
   </modules>
 
-  <dependencyManagement>
-    <dependencies>
-      <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-dependencies</artifactId>
-        <version>3.4.1</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
-    </dependencies>
-  </dependencyManagement>
 
   <dependencies>
 
@@ -53,20 +45,9 @@
     <dependency>
       <groupId>org.springdoc</groupId>
       <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
-      <version>2.2.0</version>
+      <version>${spring.doc.version}</version>
     </dependency>
 
-    <dependency>
-      <groupId>org.postgresql</groupId>
-      <artifactId>postgresql</artifactId>
-      <scope>runtime</scope>
-    </dependency>
-
-    <dependency>
-      <groupId>org.projectlombok</groupId>
-      <artifactId>lombok</artifactId>
-      <optional>true</optional>
-    </dependency>
 
     <dependency>
       <groupId>org.springframework.boot</groupId>
@@ -77,29 +58,13 @@
     <dependency>
       <groupId>com.h2database</groupId>
       <artifactId>h2</artifactId>
-      <version>2.3.232</version>
+      <version>${h2.version}</version>
       <scope>test</scope>
     </dependency>
 
   </dependencies>
 
   <build>
-
-    <plugins>
-      <plugin>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-maven-plugin</artifactId>
-        <configuration>
-          <excludes>
-            <exclude>
-              <groupId>org.projectlombok</groupId>
-              <artifactId>lombok</artifactId>
-            </exclude>
-          </excludes>
-        </configuration>
-      </plugin>
-
-    </plugins>
 
   </build>
 
