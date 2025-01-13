@@ -16,7 +16,7 @@
     <dependency>
       <groupId>com.i2i</groupId>
       <artifactId>ssa-model-order</artifactId>
-      <version>${api.version}</version>
+      <version>${project.version}</version>
     </dependency>
   </dependencies>
 

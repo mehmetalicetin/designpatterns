@@ -1,0 +1,10 @@
+server:
+  port: 8092
+
+customer:
+  service:
+    url: http://localhost:8089
+
+cart:
+  service:
+    url: http://localhost:8091

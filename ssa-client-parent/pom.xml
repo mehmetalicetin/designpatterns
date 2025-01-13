@@ -24,12 +24,6 @@
   </modules>
 
 
-
-  <properties>
-    <spring-cloud.version>2024.0.0</spring-cloud.version>
-    <api.version>0.0.1-SNAPSHOT</api.version>
-  </properties>
-
   <dependencyManagement>
     <dependencies>
       <dependency>
