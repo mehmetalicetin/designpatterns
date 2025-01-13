@@ -1,0 +1,3 @@
+customer:
+  service:
+    url: localhost:8089

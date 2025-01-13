@@ -6,21 +6,24 @@
   <packaging>pom</packaging>
   <groupId>com.i2i</groupId>
   <artifactId>ssa-parent</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>${project.version}</version>
   <name>Self Service Application</name>
   <description>Self Service Application Training Project</description>
 
   <properties>
-    <maven.compiler.source>11</maven.compiler.source>
-    <maven.compiler.target>11</maven.compiler.target>
-    <java.version>11</java.version>
-    <lombok.version>1.18.24</lombok.version>
+    <maven.compiler.source>21</maven.compiler.source>
+    <maven.compiler.target>21</maven.compiler.target>
+    <java.version>21</java.version>
+    <lombok.version>1.18.36</lombok.version>
+    <jetbrains.annotations.version>24.0.0</jetbrains.annotations.version>
+    <project.version>0.0.1-SNAPSHOT</project.version>
   </properties>
 
   <modules>
     <module>ssa-api-parent</module>
     <module>ssa-client-parent</module>
     <module>ssa-gui</module>
+    <module>ssa-model-parent</module>
   </modules>
 
   <dependencies>
@@ -30,6 +33,13 @@
       <artifactId>lombok</artifactId>
       <version>${lombok.version}</version>
       <optional>true</optional>
+    </dependency>
+
+    <dependency>
+      <groupId>org.jetbrains</groupId>
+      <artifactId>annotations</artifactId>
+      <version>${jetbrains.annotations.version}</version>
+      <scope>compile</scope>
     </dependency>
 
   </dependencies>
