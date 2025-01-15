@@ -60,4 +60,9 @@ public class Order extends BaseModel {
 		this.createDate = createDate;
 		this.items = items;
 	}
+
+	@PrePersist
+	protected void onCreate() {
+		this.createDate = LocalDateTime.now();
+	}
 }
