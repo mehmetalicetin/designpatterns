@@ -2,6 +2,7 @@ package com.i2i.ssa.api.order.service;
 
 import com.i2i.dto.CustomerResponseDTO;
 import com.i2i.ssa.api.client.customer.CustomerClient;
+import com.i2i.ssa.api.order.mapper.OrderMapper;
 import com.i2i.ssa.api.order.model.Order;
 import com.i2i.ssa.api.order.repository.OrderRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -27,6 +28,9 @@ class OrderServiceTest {
 
 	@Mock
 	private CustomerClient customerClient;
+
+	@Mock
+	OrderMapper orderMapper;
 
 	@Mock
 	Order order;
