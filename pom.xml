@@ -26,6 +26,7 @@
     <module>ssa-gui</module>
     <module>ssa-model-parent</module>
       <module>config-server</module>
+      <module>eureka-server</module>
   </modules>
 
   <dependencies>
@@ -43,8 +44,6 @@
       <version>${jetbrains.annotations.version}</version>
       <scope>compile</scope>
     </dependency>
-
-
   </dependencies>
 
   <dependencyManagement>

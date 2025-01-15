@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: eureka-server
+  config:
+    import: http://localhost:8888/eureka-server.yml
