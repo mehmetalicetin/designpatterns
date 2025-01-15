@@ -13,12 +13,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.UUID;
 
-@FeignClient(name = "customer-service", url = "${customer.service.url}")
+@FeignClient(name = "customer-service", path = "/api/v1/customer")
 public interface CustomerClient {
 
-    @GetMapping("/api/v1/customer/{id}")
+    @GetMapping("/{id}")
 	ResponseEntity<CustomerResponseDTO> getCustomerById(@PathVariable("id") UUID id);
 
-    @PostMapping("/api/v1/customer")
+    @PostMapping("/customer")
     ResponseEntity<CustomerResponseDTO> create(@RequestBody CustomerRequestDTO requestCustomerDto);
 }
