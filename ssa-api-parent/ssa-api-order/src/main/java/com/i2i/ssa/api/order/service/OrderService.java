@@ -16,24 +16,22 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.Random;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 public class OrderService extends BaseService<Order> {
 	private final  OrderRepository repository;
 	private  final OrderMapper    orderMapper;
 	private final CartClient      cartClient;
-	private final DiscoveryClient customerClient;
+	//private final DiscoveryClient customerClient;
+	private final RestTemplate restTemplate;
 
-	public OrderService(OrderRepository repository, OrderMapper orderMapper, CartClient cartClient, DiscoveryClient customerClient) {
+	public OrderService(OrderRepository repository, OrderMapper orderMapper, CartClient cartClient, RestTemplate restTemplate) {
 		super(repository);
 		this.orderMapper = orderMapper;
 		this.repository= repository;
 		this.cartClient = cartClient;
-		this.customerClient = customerClient;
+		this.restTemplate = restTemplate;
 	}
 
 	public OrderResponseDTO findOrderById(UUID id) {
@@ -70,34 +68,40 @@ public class OrderService extends BaseService<Order> {
 
 
 	private void checkCustomerExist(UUID customerId) {
-		// Get available instances of the customer service
-		List<ServiceInstance> customerClientInstances = customerClient.getInstances("customer-service");
-		if (customerClientInstances.isEmpty()) {
-			throw new RuntimeException("No instances of 'customer-service' are available.");
-		}
-
-		// Select an instance using a load-balancing strategy
-		ServiceInstance selectedInstance = customerClientInstances.get(new Random().nextInt(customerClientInstances.size()));
-
-		// Build the service URL
-		String serviceUrl = String.format("http://%s:%d/api/v1/customer/%s",
-				selectedInstance.getHost(),
-				selectedInstance.getPort(),
-				customerId.toString());
-
-		// Perform the API call
-		RestTemplate restTemplate = new RestTemplate(); // Or use your configured RestTemplate bean
-		ResponseEntity<CustomerResponseDTO> response;
-		try {
-			response = restTemplate.getForEntity(serviceUrl, CustomerResponseDTO.class);
-		} catch (Exception ex) {
-			throw new RuntimeException("Error while contacting 'customer-service': " + ex.getMessage(), ex);
-		}
-
-		// Check response status
-		if (!response.getStatusCode().is2xxSuccessful() || response.getBody() == null) {
+		CustomerResponseDTO customer = restTemplate.getForObject("http://customer-service/api/v1/customer/" + customerId, CustomerResponseDTO.class);
+		if (Objects.isNull(customer))
 			throw new RuntimeException("Customer not found");
-		}
+
+
+		//		// Get available instances of the customer service
+//		List<ServiceInstance> customerClientInstances = customerClient.getInstances("customer-service");
+//		if (customerClientInstances.isEmpty()) {
+//			throw new RuntimeException("No instances of 'customer-service' are available.");
+//		}
+//
+//		// Select an instance using a load-balancing strategy
+//		ServiceInstance selectedInstance = customerClientInstances.get(new Random().nextInt(customerClientInstances.size()));
+//
+//		// Build the service URL
+//		String serviceUrl = String.format("http://%s:%d/api/v1/customer/%s",
+//				selectedInstance.getHost(),
+//				selectedInstance.getPort(),
+//				customerId.toString());
+//
+//		// Perform the API call
+//		RestTemplate restTemplate = new RestTemplate(); // Or use your configured RestTemplate bean
+//		ResponseEntity<CustomerResponseDTO> response;
+//		try {
+//			response = restTemplate.getForEntity(serviceUrl, CustomerResponseDTO.class);
+//		} catch (Exception ex) {
+//			throw new RuntimeException("Error while contacting 'customer-service': " + ex.getMessage(), ex);
+//		}
+//
+//		// Check response status
+//		if (!response.getStatusCode().is2xxSuccessful() || response.getBody() == null) {
+//			throw new RuntimeException("Customer not found");
+//		}
+
 
 
 
