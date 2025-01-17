@@ -49,7 +49,7 @@ public class OrderService extends BaseService<Order> {
 		Order order = orderMapper.toOrder(orderRequestDTO);
 		Order saved = save(order);
 
-		deleteCart(customerId);
+		//deleteCart(customerId);
 
 
 		return orderMapper.toResponseDTO(saved);
