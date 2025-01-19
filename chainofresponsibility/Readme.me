@@ -1,0 +1,11 @@
+Chain of Responsibility (Sorumluluk Zinciri),
+bir isteğin (request) işlenmesi için birden fazla nesnenin sırasıyla devreye girmesini sağlayan davranışsal (behavioral) bir tasarım desenidir.
+İstek, zincirdeki nesneler (handler’lar) arasında dolaşır ve uygun nesne tarafından işlenene kadar iletilmeye devam eder.
+
+
+Örnek Senaryo: İstek İşleme Zinciri
+
+Kimlik doğrulaması (Authentication)
+Yetkilendirilmesi (Authorization)
+Veri doğrulaması (Validation)
+şeklinde üç aşamada kontrol edilmesi gerekiyor. Eğer istek geçerli değilse hata döndürülmeli, eğer geçerliyse işleme devam edilmeli.
