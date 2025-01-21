@@ -16,3 +16,16 @@ spring:
 logging:
   level:
     root: INFO
+
+management:
+  health:
+    circuitbreaker:
+      enabled: true  # Fixed: Changed 'enable' to 'enabled'
+  endpoints:
+    web:
+      exposure:
+        include: "*"  # Fixed: Added quotes around '*'
+  endpoint:
+    health:
+      show-details: always  # Fixed: Removed extra period
+

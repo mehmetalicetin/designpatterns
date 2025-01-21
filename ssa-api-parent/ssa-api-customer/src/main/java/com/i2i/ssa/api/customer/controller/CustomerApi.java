@@ -2,6 +2,7 @@ package com.i2i.ssa.api.customer.controller;
 
 import com.i2i.dto.CustomerRequestDTO;
 import com.i2i.dto.CustomerResponseDTO;
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -41,6 +42,7 @@ public interface CustomerApi {
 			produces = MediaType.APPLICATION_JSON_VALUE,
 			consumes = MediaType.APPLICATION_JSON_VALUE)
 	@Operation(summary = "Create customer")
+	@CircuitBreaker(name = "customer-service")
 	ResponseEntity<CustomerResponseDTO> create(@RequestBody CustomerRequestDTO customerRequestDTO);
 
 
