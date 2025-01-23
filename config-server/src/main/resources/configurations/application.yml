@@ -16,6 +16,13 @@ spring:
 logging:
   level:
     root: INFO
+  file:
+    name: config-server/docker/logs/ssa-app.log
+
+logstash:
+  enabled: true
+  host: logstash
+  port: 5001
 
 management:
   health:
@@ -28,4 +35,11 @@ management:
   endpoint:
     health:
       show-details: always  # Fixed: Removed extra period
+  tracing:
+    sampling:
+      probability: 1.0  # 100% tracing for all requests
+  zipkin:
+    tracing:
+      endpoint: http://localhost:9411/api/v2/spans  # Zipkin Server URL
+
 
