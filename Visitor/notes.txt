@@ -1,0 +1,8 @@
+Visitor Pattern Bileşenleri
+Visitor pattern şu bileşenlerden oluşur:
+
+Visitor (Ziyaretçi Arayüzü) → Nesnelere uygulanacak işlemleri tanımlar.
+ConcreteVisitor (Somut Ziyaretçi) → Farklı nesne türleri için işlemlerin implementasyonunu içerir.
+Element (Öğe Arayüzü) → accept(Visitor visitor) metodunu tanımlar.
+ConcreteElement (Somut Öğe) → Belirli bir nesneyi temsil eder ve accept(Visitor visitor) metodunu uygular.
+ObjectStructure (Nesne Yapısı) → Birden fazla öğeyi (element) barındırır ve onları ziyaretçiye kabul ettirir.
