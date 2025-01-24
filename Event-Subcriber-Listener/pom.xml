@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.i2i.fcbs</groupId>
-  <artifactId>event-subcriber-listener</artifactId>
+  <artifactId>Event-Subcriber-Listener</artifactId>
   <version>1.0-SNAPSHOT</version>
   <packaging>jar</packaging>
 
