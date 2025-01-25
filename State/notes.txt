@@ -1,0 +1,7 @@
+Örnek: Medya Oynatıcı (MP3 Player)
+Bir medya oynatıcıda aşağıdaki durumlar olabilir:
+
+Stopped (Durdurulmuş)
+Playing (Çalıyor)
+Paused (Duraklatılmış)
+Her durum, oynatıcının butonlarına farklı tepkiler vermesini sağlayacak.
