@@ -12,5 +12,6 @@
   </parent>
 
   <artifactId>ssa-api-core</artifactId>
+  <packaging>jar</packaging>
 
 </project>
