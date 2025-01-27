@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: config-server-container
+    ports:
+      - "8888:8888"
+
+    environment:
+      - SPRING_APPLICATION_NAME=config-server
+      - SERVER_PORT=8888
+      - SPRING_CLOUD_CONFIG_SERVER_NATIVE_SEARCH_LOCATIONS=classpath:/configurations
+    networks:
+      - ssa-network
+
+networks:
+  ssa-network:
+    driver: bridge

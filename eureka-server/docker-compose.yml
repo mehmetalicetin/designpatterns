@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: eureka-container
+    networks:
+      - ssa-network
+
+networks:
+  ssa-network:
+    driver: bridge

@@ -17,7 +17,7 @@ logging:
   level:
     root: INFO
   file:
-    name: config-server/docker/logs/ssa-app.log
+    name: docker/logs/ssa-app.log
 
 logstash:
   enabled: true
